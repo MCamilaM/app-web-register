@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Web Pague</title>
-        <link rel="stylesheet" href="../static/css/styleRegister.css" type="text/css" />
-        <script src="../static/js/appRegister.js" type="text/javascript" charset="utf-8"></script>
-    </head>
-    <body>
-        <h1>Register Users</h1>
-        <form action="/register_user" method="post">
-            <label>Identification</label> <input type="number" name="id"/><br> <br>
-            <label>Name</label> <input type="text" name="name"/><br> <br>
-            <label>Lastname</label> <input type="text" name="lastname"/><br> <br>
-            <label>Birthday</label> <input type="date" name="birthday"/><br> <br>
-            <button>Register</button>
-        </form>
-    </body>
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <title>Web Pague</title>
+      <link rel="stylesheet" href="../static/css/styleRegister.css" type="text/css" />
+      <script src="../static/js/appRegister.js" type="text/javascript" charset="utf-8"></script>
+   </head>
+   <body>
+      <h1>Register Users</h1>
+      <form action="/register_user" method="post">
+          
+          <label for="lang">Tipo de Documento</label>
+          <select name="typeDocument" id="lang">
+            <option value="TI">Tarjeta de identidad</option>
+            <option value="CC">Cédula de ciudadanía</option>
+            <option value="CE">Cédula de extranjería</option>
+            <option value="PA">Pasaporte</option>
+          </select>
+          <br><br>
+             
+         <label for="dni">DNI</label>
+         <input type="number" id="dni" name="dni" required/><br><br>
+         
+         <label for="name">Nombre</label>
+         <input type="text" id="name" name="name" required/><br><br>
+         
+         <label for="lastname">Apellido</label>
+         <input type="text" id="lastname" name="lastname" required/><br><br>
+         
+         <label for="address">Dirección</label>
+         <input type="text" id="address" name="address"/><br><br>
+         
+         <label for="phoneNumber">Número de Teléfono</label>
+         <input type="number" id="phoneNumber" name="phoneNumber"/><br><br>
+         
+         <label for="email">Email</label>
+         <input type="email" id="email" name="email"/><br><br>
+         
+         <button type="submit">Registrar</button>
+      </form>
+   </body>
 </html>
