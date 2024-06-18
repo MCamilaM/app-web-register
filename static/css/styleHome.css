@@ -6,7 +6,7 @@ img {
 h1 {
     text-align: center;
     font-size: 60px;
-    color: white;
+    color: #3F7C85;
 }
 h2 {
     text-align: center;
@@ -15,12 +15,10 @@ h2 {
 div{
     text-align: center;
 }
- body {
-    background: linear-gradient(black, black, grey, grey, grey, grey, black, black);
-}
+
 button {
     font-size: 20px;
-    background-color: grey;
+    background-color: #FF5F5D;
     color: black;
     border-radius: 10px;
     padding: 4px;
