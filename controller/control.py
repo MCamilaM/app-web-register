@@ -1,8 +1,8 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, jsonify
 from database.db import *
 from entities.client import Client
 import html
-
+import json
 
 def home_page_ctrl():
     return render_template("home.html")
@@ -53,15 +53,25 @@ def consult_client_ctrl():
 def get_client_id_ctrl():
     
     data = request.get_json()
-    dni = data.get('dni')
+    dni = data['dni']
 
     if not dni:
-        return jsonify({"error": "No se proporcionó el DNI"}), 400
+        return "No se proporcionó el DNI"
         
-    client = get_client_id(dni)
-    print(client)
-
-    if client:
-        return f"cliente encontrado: {client}"
+    result = get_client_id(dni)
+    
+    if result:
+        print(result)
+        return jsonify({
+            "dni": result[1],
+            "typeDocument": result[2],
+            "name": result[3],
+            "lastname": result[4],
+            "address": result[5],
+            "phoneNumber": result[6],
+            "email": result[7]
+        })
+        
     else:
-        return f"no existe el cliente con el dni: {dni}"
+        return jsonify(
+            {"error": f"El cliente con DNI: {dni} no fue encontrado"})

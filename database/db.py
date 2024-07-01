@@ -72,9 +72,9 @@ def get_client_id(client_id):
             cursor = connection.cursor()
             query = f"SELECT * FROM Client WHERE DNI = {client_id}"
             cursor.execute(query)
-            client = cursor.fetchall()
+            client = cursor.fetchone()
     except Exception as e:
-        print(f"Error fetching users: {e}")
+        print(f"Error fetching user with dni {client_id}: {e}")
     finally:
         cursor.close()
         connection.close()
