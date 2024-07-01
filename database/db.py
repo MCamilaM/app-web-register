@@ -28,7 +28,9 @@ def getConnection():
 connection = getConnection()
 
 def save_client(client):
+    isClientSaved = True
     try:
+        isClientSaved = True
         connection = getConnection()
         with connection.cursor() as cursor:
             query = """
@@ -40,8 +42,11 @@ def save_client(client):
         cursor.close()
         connection.close()
     except Exception as e:
+        isClientSaved = False
         print(f"Error saving user: {e}")
         connection.rollback()
+    finally:
+        return isClientSaved
 
 def get_clients():
     clients = []
@@ -58,3 +63,20 @@ def get_clients():
         cursor.close()
         connection.close()
     return clients
+    
+def get_client_id(client_id):
+    client = None
+    try:
+        connection = getConnection()
+        with connection.cursor() as cursor:
+            cursor = connection.cursor()
+            query = f"SELECT * FROM Client WHERE DNI = {client_id}"
+            cursor.execute(query)
+            client = cursor.fetchall()
+    except Exception as e:
+        print(f"Error fetching users: {e}")
+    finally:
+        cursor.close()
+        connection.close()
+    return client
+    

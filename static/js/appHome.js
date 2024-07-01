@@ -1,6 +1,10 @@
 function registerPage(){
     window.location = "/register_page"
 }
-function consultPage(){
+function consultAllPage(){
    window.location = "/clients"
+}
+
+function consultClient(){
+   window.location = "/consultClient"
 }
