@@ -1,1 +1,16 @@
+#cloud9
+.c9
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignore __pycache__ directories
+**/__pycache__/
+
+credentials/keys_s3.py
 database/connection.env
