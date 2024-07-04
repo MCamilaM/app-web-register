@@ -8,3 +8,12 @@ def get_connection_s3():
         print("Connection S3")
     except Exception as err:
         print(err)
+        
+def save_file(photo):
+    photo_path = "/tmp/photo1.png"
+    
+    try: 
+        photo.save(photo_path)
+        print("photo saved")
+    except Exception as e:
+        print(f"Error saving photo: {e}")

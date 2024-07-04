@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, render_template, jsonify
 from database.db import *
 from entities.client import Client
+from controller.admin_s3 import *
 import html
 import json
 
@@ -18,12 +19,18 @@ def register_user_ctrl():
     address = request.form["address"]
     phoneNumber = request.form["phoneNumber"]
     email = request.form["email"]
+    photo = request.files["photo"]
     
     client = Client(dni, typeDocument, name, lastname, address, phoneNumber, email)
     
     try:
         save_client(client)
         message = "Cliente registrado exitosamente"
+        
+        get_connection_s3()
+    
+        save_file(photo)
+
     except Error as e:
         message = f"Fallo al registrar cliente: {e}"
     
@@ -31,9 +38,11 @@ def register_user_ctrl():
     
 def consult_clients_ctrl():
     clients = get_clients()
-    print(clients)
+    
     message = request.args.get('message')
+    
     print(message)
+    
     # Generar la tabla HTML
     tabla = ""
     if message is not None:
