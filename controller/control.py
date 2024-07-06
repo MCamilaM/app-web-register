@@ -24,14 +24,19 @@ def register_user_ctrl():
     client = Client(dni, typeDocument, name, lastname, address, phoneNumber, email)
     
     try:
-        save_client(client)
-        message = "Cliente registrado exitosamente"
-        
-        get_connection_s3()
-    
-        save_file(photo)
+        confirm_save = save_client(client)
+        if confirm_save: 
+            s3_resource = get_connection_s3()
+            photo_path_local = save_file(photo)
+            confirm_photo = upload_file(s3_resource, photo, photo_path_local, dni)
+            if confirm_photo:
+                message = "Cliente e imagen guardadas exitosamente"
+            else:
+                message = "Cliente registrado exitosamente sin imagen"
+        else:
+            message = "Error: el cliente no fue guardado"
 
-    except Error as e:
+    except NameError as e:
         message = f"Fallo al registrar cliente: {e}"
     
     return redirect(url_for('list_clients', message=message))
@@ -40,8 +45,6 @@ def consult_clients_ctrl():
     clients = get_clients()
     
     message = request.args.get('message')
-    
-    print(message)
     
     # Generar la tabla HTML
     tabla = ""
@@ -71,6 +74,8 @@ def get_client_id_ctrl():
     
     if result:
         print(result)
+        s3_resource = get_connection_s3()
+        photo = consult_file(s3_resource, dni)
         return jsonify({
             "dni": result[1],
             "typeDocument": result[2],
@@ -78,7 +83,8 @@ def get_client_id_ctrl():
             "lastname": result[4],
             "address": result[5],
             "phoneNumber": result[6],
-            "email": result[7]
+            "email": result[7],
+            "photo": photo
         })
         
     else:
