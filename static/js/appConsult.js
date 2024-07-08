@@ -38,7 +38,6 @@ function displayClientInfo(client) {
         <p><strong>Apellido:</strong> ${client.lastname}</p>
         <p><strong>Email:</strong> ${client.email}</p>
         <p><strong>Telefono:</strong> ${client.phoneNumber}</p>
-        
     `;
 }
 

@@ -13,6 +13,30 @@ button {
     margin-left: 0.3%;
     margin-right: 0.3%;
 }
-.consult{
+
+.consult {
     text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group input {
+    margin-right: 10px; /* Ajusta el espacio entre el input y el botón */
+}
+
+.cliente-info {
+    justify-content: center;
+    text-align: center;
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior del div */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de tarjeta */
+    width: 300px; /* Ancho de la tarjeta */
+    max-width: 90%; /* Asegura que no se salga de la pantalla en dispositivos pequeños */
 }
